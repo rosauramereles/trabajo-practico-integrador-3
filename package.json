@@ -2,22 +2,22 @@
   "name": "trabajo-practico-integrador-3",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "scripts": {
-    "dev": "node --watch app.js"
+  "keywords": [],
+  "homepage": "https://github.com/rosauramereles/trabajo-practico-integrador-3#readme",
+  "bugs": {
+    "url": "https://github.com/rosauramereles/trabajo-practico-integrador-3/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rosauramereles/trabajo-practico-integrador-3.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
+  "author": "",
   "type": "module",
-  "bugs": {
-    "url": "https://github.com/rosauramereles/trabajo-practico-integrador-3/issues"
+  "main": "app.js",
+  "scripts": {
+    "dev": "node --watch app.js"
   },
-  "homepage": "https://github.com/rosauramereles/trabajo-practico-integrador-3#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
