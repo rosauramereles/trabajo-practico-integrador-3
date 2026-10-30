@@ -1,34 +1,35 @@
-import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import { startDB } from "./src/config/database.js";
-//import authRoutes from './src/routes/auth.routes.js';
-//import userRoutes from './src/routes/user.routes.js';
-//import eventRoutes from './src/routes/event.routes.js';
-//import categoryRoutes from './src/routes/category.routes.js';
+import "dotenv/config"; // Carga las variables del .env
+import express from "express"; // Framework del servidor
+import cors from "cors"; // Permite peticiones de otros orígenes
+import cookieParser from "cookie-parser"; // Lee las cookies
+
+import { connectDB } from "./src/config/database.js"; // Conexión a MongoDB
+//import { authRouter } from "./src/routes/authRoutes.js"; // Rutas de auth
+//import { userRouter } from "./src/routes/userRoutes.js"; // Rutas de usuarios
+//import { categoryRouter } from "./src/routes/categoryRoutes.js"; // Rutas de categorías
+//import { eventRouter } from "./src/routes/eventRoutes.js"; // Rutas de eventos
+
+const app = express(); // Crea el servidor
+
+app.use(cors()); // Habilita CORS
+app.use(express.json()); // Permite leer JSON en req.body
+app.use(cookieParser()); // Permite leer cookies en req.cookies
 
 
-//CONFIGURACION DE LA APLICACION CON EXPRESS Y CON EL PUERTO 
-const app = express();
-const PORT = process.env.PORT || 3003;
+//Configuracion de las rutas 
+//app.use("/api/auth", authRouter); // Prefijo para rutas de auth
+//app.use("/api/users", userRouter); // Prefijo para rutas de usuarios
+//app.use("/api/categories", categoryRouter); // Prefijo para rutas de categorías
+//app.use("/api/events", eventRouter); // Prefijo para rutas de eventos
 
-//MIDDLEWARES Y PARA QUE LEE EL JSON
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors());
+const PORT = process.env.PORT || 3000; // Puerto del .env o 3000
 
-//CONEXIÓN A LAS RUTAS
+const startServer = async () => {
+  await connectDB(); // Espera a conectar con la base
 
-//app.use('/api/auth', authRoutes);
-//app.use('/api/users', userRoutes);
-//app.use('/api/events', eventRoutes);
-//app.use('/api/categories', categoryRoutes);
+  app.listen(PORT, () => {
+    console.log("Servidor listo"); // Avisa que arrancó
+  });
+};
 
-
-
-app.listen(PORT, async () => {
-  await startDB();
-  console.log("Servidor listo");
-});
-
+startServer(); // Arranca todo
