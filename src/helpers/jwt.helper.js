@@ -1,23 +1,18 @@
-import jwt from "jsonwebtoken"; //Librería para y verificar el tokens
+import jwt from "jsonwebtoken"; // Librería para crear y verificar tokens
 
-export const generaToken = (user) => { //Recibe el usuario
-    return jwt.sign (
-{
-    id: user._id.toString(), //Guarda el id del usuario (como texto)
-    role: user.role, //Guarda el rol (user o admitrador)
-},
-process.env.JWT_SECRET, //Clave secreta 
-{
-    expiresIn: process.env.JWT_SECRET || "1d", //Cuánto dura el token antes de vencer (1dia si no hay en el .env)
-},
-);
-};
-export const verifyToken = (token) => { //Recibe el token a revisar 
-    return jwt.verify(token, process.env.JWT_SECRET); //Devuelve el payload o lanza error 
+export const generateToken = (user) => { // Recibe el usuario completo
+  return jwt.sign(
+    {
+      id: user._id.toString(), // Guarda el id del usuario (como texto)
+      role: user.role, // Guarda el rol (user o admin)
+    },
+    process.env.JWT_SECRET, // Clave secreta para firmar
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN || "1d", // Duración del token (1 día si no hay en el .env)
+    },
+  );
 };
 
-//payload son los datos que guarda del token , es la carga que viaja dentro del JWT
-//Es el objeto que armé en el generaToken
-
-
-
+export const verifyToken = (token) => { // Recibe el token a revisar
+  return jwt.verify(token, process.env.JWT_SECRET); // Devuelve el payload o lanza error
+};
